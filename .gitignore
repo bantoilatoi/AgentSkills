@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+
+# Local git worktrees live here; sibling branches keep their own uncommitted state in them
+.claude/worktrees/
+
+# Eval runs write here
+evals/results/
+
+# Third-party plugins the evals load, fetched by scripts/fetch-eval-plugins.sh
+evals/*/.plugins/

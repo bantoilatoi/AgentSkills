@@ -1,0 +1,20 @@
+# Width and line endings are not declared here. Line endings are .gitattributes' job, and
+# declaring them in two places is how the two drift apart; no line-width rule is enforced by
+# anything in this repository, and an unenforced one is just a comment.
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.sh]
+indent_size = 2
+
+[*.{json,yml,yaml}]
+indent_size = 2
+
+# Reference tables and rule rows in the skills run long by design.
+[*.md]
+trim_trailing_whitespace = false

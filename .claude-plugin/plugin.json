@@ -1,0 +1,20 @@
+{
+  "name": "bantoilatoi",
+  "description": "bantoilatoi Agent Skills: six skills for instruction files, orchestration, independent review, testing, project docs and memory hygiene, plus fab for the Fab asset marketplace.",
+  "version": "5.7.0",
+  "author": {
+    "name": "bantoilatoi",
+    "url": "https://github.com/bantoilatoi"
+  },
+  "homepage": "https://github.com/bantoilatoi/AgentSkills",
+  "repository": "https://github.com/bantoilatoi/AgentSkills",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "agents-md",
+    "code-review",
+    "testing",
+    "fab",
+    "gamedev"
+  ]
+}

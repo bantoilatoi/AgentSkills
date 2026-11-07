@@ -1,0 +1,162 @@
+{
+  "name": "bantoilatoi",
+  "description": "bantoilatoi Agent Skills, plus a pinned entry for every plugin the bantoilatoi setup uses that no official or vendor marketplace carries. Third-party entries install straight from their upstream repositories; this repository redistributes none of their code.",
+  "owner": {
+    "name": "bantoilatoi",
+    "url": "https://github.com/bantoilatoi"
+  },
+  "plugins": [
+    {
+      "name": "bantoilatoi",
+      "description": "bantoilatoi Agent Skills: six skills for instruction files, orchestration, independent review, testing, project docs and memory hygiene, plus fab for the Fab asset marketplace.",
+      "source": "./"
+    },
+    {
+      "name": "security-audit",
+      "description": "Cloudflare's security-audit skill, installed from cloudflare/security-audit-skill at c1c8a8c (MIT). Nothing is redistributed here.",
+      "version": "0.0.0+c1c8a8c",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/cloudflare/security-audit-skill.git",
+        "sha": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8"
+      },
+      "strict": false,
+      "skills": [
+        "./skills/security-audit"
+      ],
+      "homepage": "https://github.com/cloudflare/security-audit-skill",
+      "license": "MIT",
+      "category": "security"
+    },
+    {
+      "name": "web-design-guidelines",
+      "description": "Vercel's web-design-guidelines skill (the Web Interface Guidelines as a UI audit), installed from vercel-labs/agent-skills at 063bee9. Upstream declares no license for it; nothing is redistributed here.",
+      "version": "0.0.0+063bee9",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/vercel-labs/agent-skills.git",
+        "path": "skills",
+        "sha": "063bee94c3f4df8453406c830b0a7df0f2860278"
+      },
+      "strict": false,
+      "skills": [
+        "./web-design-guidelines"
+      ],
+      "homepage": "https://vercel.com/design/guidelines",
+      "category": "design"
+    },
+    {
+      "name": "remotion",
+      "description": "Remotion's Agent Skills, installed from remotion-dev/skills at 4.0.529 (cf49eff). Upstream declares no license; Remotion itself is under the Remotion License. Nothing is redistributed here.",
+      "version": "4.0.529",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/remotion-dev/skills.git",
+        "sha": "cf49eff5d4463b33966b6618c83f7295797dd028"
+      },
+      "strict": false,
+      "skills": [
+        "./skills/"
+      ],
+      "homepage": "https://www.remotion.dev/docs/ai/skills",
+      "category": "design"
+    },
+    {
+      "name": "vercel-composition-patterns",
+      "description": "Optional: React composition patterns that scale. Installed from vercel-labs/agent-skills at 063bee9 (skills/composition-patterns, MIT).",
+      "version": "0.0.0+063bee9",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/vercel-labs/agent-skills.git",
+        "path": "skills",
+        "sha": "063bee94c3f4df8453406c830b0a7df0f2860278"
+      },
+      "strict": false,
+      "skills": [
+        "./composition-patterns"
+      ],
+      "homepage": "https://github.com/vercel-labs/agent-skills",
+      "license": "MIT",
+      "category": "development"
+    },
+    {
+      "name": "vercel-react-view-transitions",
+      "description": "Optional: React View Transition API animations. Installed from vercel-labs/agent-skills at 063bee9 (skills/react-view-transitions, MIT).",
+      "version": "0.0.0+063bee9",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/vercel-labs/agent-skills.git",
+        "path": "skills",
+        "sha": "063bee94c3f4df8453406c830b0a7df0f2860278"
+      },
+      "strict": false,
+      "skills": [
+        "./react-view-transitions"
+      ],
+      "homepage": "https://github.com/vercel-labs/agent-skills",
+      "license": "MIT",
+      "category": "development"
+    },
+    {
+      "name": "vercel-react-native-skills",
+      "description": "Optional: React Native and Expo best practices. Installed from vercel-labs/agent-skills at 063bee9 (skills/react-native-skills, MIT).",
+      "version": "0.0.0+063bee9",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/vercel-labs/agent-skills.git",
+        "path": "skills",
+        "sha": "063bee94c3f4df8453406c830b0a7df0f2860278"
+      },
+      "strict": false,
+      "skills": [
+        "./react-native-skills"
+      ],
+      "homepage": "https://github.com/vercel-labs/agent-skills",
+      "license": "MIT",
+      "category": "development"
+    },
+    {
+      "name": "blender-lab-mcp",
+      "description": "Connects the official Blender Lab MCP server (projects.blender.org/lab/blender_mcp ff54e4d8, GPL-3.0, installed from upstream) to the harness.",
+      "version": "1.0.2",
+      "source": "./plugins/blender-lab-mcp",
+      "homepage": "https://www.blender.org/lab/mcp-server/",
+      "license": "MIT",
+      "category": "design"
+    },
+    {
+      "name": "godot-mcp-toolkit",
+      "description": "Connects NPGameDev's Godot MCP Toolkit bridge 1.0.2 (MIT, built from upstream with two fixes in patches/) to the harness.",
+      "version": "1.0.2+fork.2",
+      "source": "./plugins/godot-mcp-toolkit",
+      "homepage": "https://github.com/NPGameDev/godot-mcp-toolkit",
+      "license": "MIT",
+      "category": "development"
+    },
+    {
+      "name": "meshy-mcp",
+      "description": "Connects Meshy's official MCP server 0.5.2 (MIT, built from upstream) to Claude Code, for text- and image-to-3D, rigging, animation and retexturing.",
+      "version": "0.5.2",
+      "source": "./plugins/meshy-mcp",
+      "homepage": "https://www.meshy.ai",
+      "license": "MIT",
+      "category": "design"
+    },
+    {
+      "name": "sysres",
+      "description": "A Claude Code mod: one line above the prompt with CPU, RAM, GPU and VRAM use, the model and effort, and context used against the auto-compact window; /sysres prints a fuller snapshot. Linux; GPU figures from amdgpu.",
+      "version": "0.1.0",
+      "source": "./plugins/sysres",
+      "license": "MIT",
+      "category": "productivity"
+    },
+    {
+      "name": "typescript-native-lsp",
+      "description": "TypeScript 7 native language server (tsc --lsp --stdio). Claude Code only.",
+      "version": "1.0.0",
+      "source": "./plugins/typescript-native-lsp",
+      "license": "MIT",
+      "category": "development"
+    }
+  ]
+}

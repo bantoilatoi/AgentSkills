@@ -1,0 +1,9 @@
+{
+  "source": "https://github.com/bantoilatoi/AgentSkills",
+  "type": "git",
+  "pluginName": "bantoilatoi",
+  "autoUpdate": true,
+  "gitCommit": "3630a8fbce346d320dfbefcb5fea55fee179fb17",
+  "originSource": "Claude",
+  "externalContent": false
+}

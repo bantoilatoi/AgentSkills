@@ -1,0 +1,28 @@
+{
+  "name": "bantoilatoi-agent-skills",
+  "version": "5.7.0",
+  "description": "bantoilatoi Agent Skills: instruction files, orchestration, independent review, testing, project docs, memory hygiene, backlog maintenance, time estimates and project terminals, plus fab for the Fab asset marketplace.",
+  "license": "MIT",
+  "author": {
+    "name": "bantoilatoi",
+    "url": "https://github.com/bantoilatoi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bantoilatoi/AgentSkills.git"
+  },
+  "homepage": "https://github.com/bantoilatoi/AgentSkills",
+  "keywords": [
+    "agent-skills",
+    "agents-md",
+    "claude-code",
+    "codex",
+    "code-review",
+    "fab"
+  ],
+  "scripts": {
+    "test": "bash tests/run-all.sh",
+    "validate": "bash scripts/validate.sh --strict",
+    "doctor": "bash scripts/doctor.sh"
+  }
+}

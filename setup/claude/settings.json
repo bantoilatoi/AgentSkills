@@ -1,0 +1,195 @@
+{
+  "model": "sonnet",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-haiku-5-5": {
+      "effortLevel": "high"
+    }
+  },
+  "switchModelsOnFlag": false,
+  "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/agent-model-guard.py"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/memory-check.py",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/skill-dupes-check.py",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/compact-resume.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/context-meter.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/context-meter.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "askUserQuestionTimeout": "60s",
+  "tui": "fullscreen",
+  "timeFormat": "12-hour",
+  "remoteControlAtStartup": true,
+  "crossSessionInbound": "accept",
+  "agentPushNotifEnabled": true,
+  "autoScrollEnabled": true,
+  "extraKnownMarketplaces": {
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      },
+      "autoUpdate": true
+    },
+    "agent-browser": {
+      "source": {
+        "source": "github",
+        "repo": "vercel-labs/agent-browser"
+      },
+      "autoUpdate": true
+    },
+    "bantoilatoi": {
+      "source": {
+        "source": "github",
+        "repo": "bantoilatoi/AgentSkills"
+      }
+    },
+    "scenario-skills": {
+      "source": {
+        "source": "github",
+        "repo": "scenario-labs/skills"
+      },
+      "autoUpdate": true
+    },
+    "worker-protocol": {
+      "source": {
+        "source": "github",
+        "repo": "bantoilatoi/worker-protocol"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "unity-agent-plugin": {
+      "source": {
+        "source": "github",
+        "repo": "Unity-Technologies/unity-agent-plugin"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "lua-lsp@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "impeccable@impeccable": true,
+    "agent-browser@agent-browser": true,
+    "vercel@claude-plugins-official": true,
+    "bantoilatoi@bantoilatoi": true,
+    "cloudflare@claude-plugins-official": true,
+    "security-audit@bantoilatoi": true,
+    "superpowers@claude-plugins-official": true,
+    "sentry@claude-plugins-official": true,
+    "sentry-cli@claude-plugins-official": true,
+    "01.-getting-started@scenario-skills": true,
+    "03.-images@scenario-skills": true,
+    "godot-mcp-toolkit@bantoilatoi": true,
+    "blender-lab-mcp@bantoilatoi": true,
+    "typescript-native-lsp@bantoilatoi": false,
+    "web-design-guidelines@bantoilatoi": true,
+    "meshy-mcp@bantoilatoi": true,
+    "sysres@bantoilatoi": true,
+    "cc-plugin-you-should-know@builtin": true,
+    "04.-game-art-and-3d@scenario-skills": true,
+    "worker-protocol@worker-protocol": true,
+    "rust-analyzer-lsp@claude-plugins-official": false,
+    "netlify-skills@claude-plugins-official": true,
+    "ponytail@ponytail": true
+  },
+  "disabledMcpServers": [
+    "plugin:vercel:vercel",
+    "scenario",
+    "unity-editor-mcp",
+    "claude.ai Claude Docs"
+  ],
+  "autoCompactWindow": 500000,
+  "disableClaudeAiConnectors": true,
+  "skillOverrides": {
+    "anthropic-skills:docx": "off",
+    "anthropic-skills:xlsx": "off",
+    "anthropic-skills:pptx": "off",
+    "anthropic-skills:pdf": "off",
+    "anthropic-skills:google-workspace": "off",
+    "anthropic-skills:docs": "off",
+    "anthropic-skills:morning": "off",
+    "anthropic-skills:import-memory": "off",
+    "init": "off",
+    "keybindings-help": "off",
+    "fewer-permission-prompts": "off",
+    "plugin-authoring": "off",
+    "simplify": "off",
+    "security-review": "off"
+  }
+}

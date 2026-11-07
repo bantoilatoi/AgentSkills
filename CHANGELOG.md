@@ -1,0 +1,286 @@
+# Changelog
+
+## 5.7.0 — 2026-10-15
+
+### Added
+
+- `sysres@bantoilatoi`, a Claude Code mod: one line in the band above the prompt with CPU, RAM, GPU
+  and VRAM use as `LABEL PERCENT detail`, and on the right the model, its effort and context used
+  against the auto-compact window. Percentages turn the warning colour from 70% and the error colour
+  from 90%; groups drop from the right when the terminal is narrow. `/sysres` prints a fuller
+  snapshot with load, swap, GPU temperature and each disk, without starting a turn.
+
+### Changed
+
+- `context-meter.py` is a hook only: the `statusLine` role and its setting are gone, replaced by the
+  `sysres` band. Its notices to the model are unchanged. Haiku 5.5 now counts against its 1M window
+  rather than 200k. Migration: delete `statusLine` from `~/.claude/settings.json`, copy the new
+  script over the old one, and install `sysres@bantoilatoi`.
+
+## 5.6.2 — 2026-10-13
+
+### Changed
+
+- `backlog-maintenance` defines what counts as verified: a table per kind of claim (path, symbol,
+  behaviour, count, quoted string, command, route to stage a state, issue reference, owner
+  decision), applied to the filer's draft before filing and to every claim in a review. Checks are
+  done, not left to the reader as "verify"; a defect found while checking goes into its issue with
+  a test criterion; conflicts between the owner's words and the code become open decisions.
+- The review pass is an ordered procedure with an output per step: snapshot, read the whole batch
+  and group it by subject, check the routes to see it once, verify claim by claim, derive missing
+  inventories, search the backlog with several phrasings and compare each group, edit from a fresh
+  fetch with a read-back, and sweep labels and line references at the end. Stopping pushes only
+  verified corrections.
+- Issue standards add the rule for a complete split and for issues on the same subject, and drop
+  the duplicate `owner-action` entry from the extra labels.
+
+## 5.6.1 — 2026-10-13
+
+### Changed
+
+- `backlog-maintenance` review pass: the reviewer keeps working notes (originals, edited bodies and a
+  per-issue checklist) outside the repository, and edits by exact-match replacement that fails when
+  the expected text is missing.
+
+## 5.6.0 — 2026-10-13
+
+### Changed
+
+- `backlog-maintenance`: issues are written to an exhaustive standard. The agent investigates the
+  code before filing and writes down what it found: the cause of a bug, the files and symbols
+  involved, inventories with a verdict per row, owner decisions with their dates (open ones with a
+  recommendation), the project's constraints, how to render or reproduce the view itself, and
+  checkable acceptance criteria. Every path, symbol, command and count is checked against the code.
+- New Review mode and `references/review-pass.md`: every filed batch gets an independent review
+  that checks the issues against the standard and the code and fixes what it finds, then reports
+  per issue. A reviewer the owner has handled is left alone.
+- Issue standards add the section order, the facts rules, how to split and supersede issues, and
+  that reversing documented intent is an enhancement.
+
+## 5.5.0 — 2026-10-12
+
+### Added
+
+- `backlog-maintenance` skill: GitHub issues as the one backlog for every project — search first,
+  a fixed issue and label standard, progress recorded, closed only on verified criteria — and the
+  conversion of Markdown or text backlogs into filed issues, then retiring the file.
+- Five routing eval cases for it (`explicit`, `implicit`, `contextual`, `negative`, `ambiguous`),
+  validated by the suite but not yet run.
+
+## 5.4.1 — 2026-10-11
+
+### Fixed
+
+- `open-project-terminal`: a session opened in a new directory no longer stops at the folder-trust
+  prompt. The skill creates the folder for a new project, pre-trusts it in `~/.claude.json` and
+  checks that the first message arrived.
+
+## 5.4.0 — 2026-10-11
+
+### Added
+
+- `estimate-time` skill: remaining time and percent done from the pace of the commits on the
+  current approach, answered in agent time.
+- `open-project-terminal` skill: launch a new Claude Code session terminal for a named project.
+- Five routing eval cases for each (`explicit`, `implicit`, `contextual`, `negative`, `ambiguous`).
+  They are validated by the suite but not yet run; `docs/evals.md` records no results for them.
+
+### Changed
+
+- Register Higgsfield as a user-scope MCP server (`claude mcp add -s user --transport http
+  higgsfield https://mcp.higgsfield.ai/mcp`, then `/mcp` to sign in), since the template turns the
+  claude.ai connectors off.
+
+## 5.3.1 — 2026-10-11
+
+### Changed
+
+- Mirror more of the local setup: the Claude settings template now carries `skillOverrides`, the
+  Scenario, Unity editor and Claude Docs MCP servers in `disabledMcpServers`, and
+  `disableClaudeAiConnectors`; the Codex template carries the ponytail marketplace and plugin, the
+  desktop and shell-environment settings, the approval reviewer, service tier and `high` as the
+  interactive effort (every job call still passes `xhigh`).
+- Refresh the Codex tool inventory to Codex 0.162.1 and Claude Code 2.1.296, document the
+  `unity-agent-plugin` marketplace and the per-project Unity plugin, and say in the examples header
+  that `install.sh --global-agents` copies the file without checking its `customize:` markers.
+
+## 5.3.0 — 2026-10-11
+
+### Changed
+
+- Sync the public setup with the current local working agreement: ordered session backlog,
+  compaction and resume instructions, desktop safeguards, quality-standard routing, worktree
+  placement, commit/push rules, evidence-based estimates and the instruction-file canary.
+- Claude Code settings now mirror `sonnet` as the default model at high effort for Opus, Sonnet
+  and Haiku 5.5, the ponytail marketplace and plugin, the current plugin selection
+  and documented persistent scratch/tool storage overrides. Add the
+  `haiku-low`, `haiku-medium` and `haiku-high` worker agents, and sync the model guard hook so a
+  Haiku spawn is named `haiku-<effort>` like the other worker types. Tool revision pins already
+  match and remain unchanged.
+- Codex is reserved for assets and an additional review at `gpt-6.1-sol`/`xhigh`, using only its
+  built-in capabilities. The setup docs keep dual-harness installation as an optional layout.
+- Document the native Claude/Codex tool inventories, including Codex's seven app-managed
+  plugins and two internal servers, Claude's plugin and account MCP sources, Netlify's MCP
+  connection, cloud-synced skill caches and dependency-installation checks. Keep account state
+  and app-managed wiring outside the portable templates.
+- Recognize built-in marketplaces present only in the installed plugin registry in the
+  duplicate-skill hook, preserving their cache/data while still reporting genuine leftovers.
+
+## 5.2.0 — 2026-10-02
+
+### Added
+
+- `setup/claude/scripts/skill-dupes-check.py`, a SessionStart hook that flags skills and plugins
+  installed twice (a plugin from two marketplaces, a loose copy beside the plugin that ships it,
+  in Claude Code or Codex) and caches left by a removed marketplace; silent when all is well.
+
+## 5.1.1 — 2026-09-29
+
+### Changed
+
+- The recommended settings save Sonnet 5.5 at low effort, as the machine they back up does.
+- `examples/global-agents.md` names the repository that backs up the setup and keeps the local
+  setup as the source of truth: changes mirror to the repository, never the other way.
+- The routing evals, which make real model calls, run only when the owner asks, never on API
+  billing, rather than once per release; `claude plugin validate . --strict`, which makes none,
+  runs with the suite before a release.
+
+## 5.1.0 — 2026-09-29
+
+### Changed
+
+- Compactions are made safe to hit at any moment. The recommended settings compact at 500k
+  tokens (`autoCompactWindow`), run the new `compact-resume.py` SessionStart hook after each
+  compaction (it prints the session's `checklist.md`, the other scratchpad files and
+  `git status`) and show context used against that window in the new `statusline.py` status
+  line. `examples/global-agents.md` keeps a checklist for any task of more than a few steps,
+  written ahead of the work, treats it and the disk as the record after a compaction, and tells
+  the compaction summary what to keep. Copy both scripts in as the README's setup section says.
+- `statusline.py` becomes `context-meter.py`, which also runs as a UserPromptSubmit and
+  PostToolUse hook: every prompt carries one line with the context used against the auto-compact
+  window, and a tool call adds it only when 60%, 80%, 90% or 95% is first reached, so the model
+  sees a compaction coming. `examples/global-agents.md` brings the checklist up to date from 80%
+  and reaches a clean point from 90%. `compact-resume.py` takes the hook input's `scratchpad_dir`
+  when present and leaves hidden scratchpad files out of its list. Replace
+  `~/.claude/statusline.py` with `~/.claude/hooks/context-meter.py` and point `statusLine` at it.
+- The worker agents in `setup/claude/agents/` pin a model as well as an effort: `opus-low` to
+  `opus-xhigh` for judgment-led, long-horizon or costly-to-fail work, and `sonnet-low` to
+  `sonnet-xhigh` as the default for work with a clear spec and a way to check it. They replace
+  `worker-low` to `worker-xhigh`: delete those from `~/.claude/agents/`, copy the new files in, and
+  dispatch by the new names.
+- `agent-orchestration` defines the strong tier as the strongest the setup provides (the `opus-*`
+  types in this setup) rather than the harness's most capable model, which a setup may exclude, and
+  its tier table gains the long-horizon and quick-expert-look rows.
+- `examples/global-agents.md` is brought up to date: compaction-readiness rules, other skills load
+  only when their description fits, Codex limited to generating assets, a scratch-directory rule,
+  the delegation routing (`sonnet-*` by default, `opus-*` for strong rows, latest aliases, never
+  Fable) and one review per checkpoint.
+- The recommended Claude Code settings use model `opus` rather than `opus[1m]`.
+- The `remotion` entry pins remotion-dev/skills 4.0.529 (`cf49eff`), its latest.
+- The recommended settings drop the saved effort for Opus 5 and Sonnet 5, which the `opus` and
+  `sonnet` aliases no longer reach; Opus 5.5 stays at `high`. They turn on auto-scroll and enable
+  the Scenario, Sentry and Meshy plugins below.
+- `examples/global-agents.md` dispatches a project's own specialist agent (its `.claude/agents/`)
+  before a tier type when one fits, routes custom 2D game art, textures, skyboxes and sprite
+  animation to Scenario, and notes the `omarchy` route in the desktop marker. The README's setup
+  section describes per-project specialists and per-project plugin opt-outs with
+  `skillListingBudgetFraction`.
+- `godot-mcp-toolkit` is `1.0.2+fork.2`: its bridge is built with two fixes of our own in
+  `plugins/godot-mcp-toolkit/patches/` (a game run's port -1 stand-in is never dialled as the
+  editor; a re-discovered channel sends the response limits). Rebuild the bridge as its
+  `UPSTREAM.md` now describes.
+
+### Added
+
+- `memory-hygiene`, a skill that keeps saved memories and session handoff notes true: it checks
+  each against the repository, merges duplicates, retires finished handoffs, fixes the memory index
+  and routes drifted docs to `project-docs`, with its five eval cases.
+- `setup/claude/scripts/memory-check.py`, a SessionStart hook that flags memories no longer matching
+  the disk (index lines with no file, unlisted files, broken links, named paths that are gone) and
+  stays silent otherwise; `tests/memory-check-guard.sh` checks it. Copy it to `~/.claude/hooks/`;
+  the recommended `settings.json` registers it.
+- The working agreement keeps saved memories current with the change that made them stale, gives
+  every checkpoint one hygiene pass, and routes stale memories to `memory-hygiene`. Astra runs only
+  on the owner's explicit confirmation, always at high effort.
+- `scripts/tools.sh` builds the MCP servers no marketplace or vendor installer ships (Godot,
+  Meshy, Blender Lab) from full clones at the revisions pinned in `setup/tools.tsv`, applies our
+  patches, links each into `~/.local/bin`, and on `update` swaps to a new build while keeping the
+  previous one for servers still running; `status --remote` lists upstream's newest tags. The
+  plugins' `UPSTREAM.md` install steps now use it, and `tests/tools-guard.sh` checks it offline.
+- `meshy-mcp`, a Claude Code connector for Meshy's official MCP server 0.5.2, built from the pinned
+  tag (`plugins/meshy-mcp/UPSTREAM.md`); the API key is a sensitive plugin option kept in Claude
+  Code's credential store.
+- Setup checklist rows for the Scenario skills (`scenario-skills` marketplace), Sentry and its CLI,
+  Higgsfield, and the `meshy-mcp-server` and `sentry` tools; the Codex settings add the Scenario and
+  Higgsfield MCP servers.
+- `setup/claude/scripts/agent-model-guard.py`, a PreToolUse hook on Agent that names each subagent
+  after the model and effort it actually runs on, rewrites a `model` argument that contradicts a
+  `<model>-<effort>` type, and refuses a spawn on Fable. Copy it to `~/.claude/hooks/` and make it
+  executable; the recommended `settings.json` registers it.
+
+## 5.0.1 — 2026-09-24
+
+### Changed
+
+- superpowers installs from Anthropic's official marketplace, which now pins its latest release
+  (6.4.1), so the `bantoilatoi` marketplace no longer lists it. If you installed
+  `superpowers@bantoilatoi` from 5.0.0: `claude plugin uninstall superpowers@bantoilatoi`, then
+  `claude plugin install superpowers@claude-plugins-official`; in Codex,
+  `codex plugin remove superpowers@bantoilatoi`, then
+  `codex plugin add superpowers@claude-plugins-official`.
+
+### Fixed
+
+- `bantoilatoi-fab doctor` points a missing or mismatched skill at the `bantoilatoi` plugin rather
+  than the retired standalone installer.
+
+## 5.0.0 — 2026-09-24
+
+AgentSkills becomes an installable copy of the bantoilatoi Claude Code and Codex setup.
+
+### Breaking changes
+
+- **`threat-review` is removed**, replaced by Cloudflare's
+  [`security-audit`](https://github.com/cloudflare/security-audit-skill). To migrate:
+  1. Update the plugin (`claude plugin update bantoilatoi@bantoilatoi`; in Codex,
+     `codex plugin marketplace upgrade bantoilatoi`). If you linked skills with
+     `scripts/install.sh`, run `bash scripts/uninstall.sh` from the updated checkout: it still
+     removes the old `threat-review` links.
+  2. Install the replacement: `claude plugin install security-audit@bantoilatoi` and
+     `codex plugin add security-audit@bantoilatoi`.
+  3. Point your routing row at `security-audit:security-audit`, keeping its trigger text (auth,
+     sessions, tokens, crypto, secrets, external input, deserialization, file or network
+     boundaries, permissions or dependencies — before the review).
+- **The standalone `bantoilatoi-fab` plugin and marketplace are retired.** The Fab skill is now
+  `bantoilatoi:fab`, inside this plugin. To migrate: `claude plugin uninstall
+  bantoilatoi-fab@bantoilatoi-fab`, `claude plugin marketplace remove bantoilatoi-fab`,
+  `codex plugin remove bantoilatoi-fab@bantoilatoi-fab` and
+  `codex plugin marketplace remove bantoilatoi-fab`, or run the old installer's `--uninstall`, which
+  [`scripts/install-fab.sh`](scripts/install-fab.sh) `--uninstall` also handles. Rename routing
+  rows from `bantoilatoi-fab:bantoilatoi-fab` to `bantoilatoi:fab`.
+- **The `bantoilatoi-fab` CLI follows the AgentSkills version.** Its own 0.2.x line is retired;
+  0.2.1 was the last. Binaries are published with AgentSkills releases, and the installers are
+  now [`scripts/install-fab.sh`](scripts/install-fab.sh) and
+  [`scripts/install-fab.ps1`](scripts/install-fab.ps1). They install only FabCLI and the binary;
+  the skill comes with the plugin.
+
+### Added
+
+- The Fab CLI's source, tests, docs and history, merged under `cli/fab/` and `docs/fab/`, with
+  its CI and release builds (Linux, Windows, macOS) on GitHub-hosted runners.
+- The `bantoilatoi` marketplace lists every plugin the setup uses that no official or vendor
+  marketplace carries, each pinned to an upstream commit and installed straight from upstream:
+  `security-audit`, `superpowers`, `web-design-guidelines`, `remotion`, and the optional
+  `vercel-composition-patterns`, `vercel-react-view-transitions` and `vercel-react-native-skills`,
+  plus connector plugins of our own for the Blender and Godot MCP servers and a TypeScript 7
+  language server.
+- A README section an agent can follow to offer the whole setup as a checklist, and the
+  recommended settings and worker agents under `setup/`.
+- `install.sh` and `doctor.sh` recognise the plugin installed in Codex and make no Codex links
+  beside it.
+
+### Changed
+
+- `examples/global-agents.md` follows the current working agreement: a skill in use runs as
+  written, with listed guards that still apply, and agent tooling installs only from official or
+  reputable marketplaces.
